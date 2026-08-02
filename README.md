@@ -23,7 +23,7 @@ See [**dseconf.org/dse2026**](https://dseconf.org/dse2026) for details
 | 10 | Household finance | Sylvain Catherine | ☐ | ☐ | ☐ |
 | 11 | Dynamic programming of mergers and acquisitions | Yufeng Wu | ☐ | ☐ | ☐ |
 | 12 | Dynamic games of network competition | Victor Aguirregabiria | ☐ | ☐ | ☐ |
-| 13 | Endogenous grid point methods (EGM and DCEGM) | Bertel Schjerning | ☐ | ☐ | ☐ |
+| 13 | Endogenous grid point methods (EGM and DCEGM) | Bertel Schjerning | ☑ | ☑ | ☑ |
 | 14 | Sequential estimation of dynamic discrete games (NPL) | Victor Aguirregabiria | ☑ | ☑ | ☐ |
 | 15 | Identification and estimation of non-equilibrium beliefs in games | Victor Aguirregabiria | ☐ | ☐ | ☐ |
 | 16 | Directional dynamic games with multiple equilibria | Bertel Schjerning | ☐ | ☐ | ☐ |
