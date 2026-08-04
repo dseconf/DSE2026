@@ -113,61 +113,28 @@ def bellman(V_next, par, taste_shocks = 'None', stochastic_transition = False):
             
         # a. compute expected future value for each choice, given the state: EV(x,d)
         if stochastic_transition == False:
-            
-            # FILL IN. EXERCISE 1. Delete "None"
-            EV_keep = None 
-            EV_replace = None
-
-            ### SOLUTION ###
             EV_keep = EV_deterministic(0, x, V_next, par)
             EV_replace = EV_deterministic(1, x, V_next, par)
-            ### SOLUTION ###
 
         else:
-            
-            # FILL IN. EXERCISE 2. Delete "None"
-            EV_keep = None
-            EV_replace = None
-
-            ### SOLUTION ###
             EV_keep = EV_stochastic(0, x, V_next, par)
             EV_replace = EV_stochastic(1, x, V_next, par)
-            ### SOLUTION ###
 
         # b. Calculate value of each choice, "value-choice functions"
-        # FILL IN. EXERCISE 1. Delete "None"
-        value_keep = None
-        value_replace = None
-        maxV = None
-
-        ### SOLUTION ###
         value_keep = util(0, x, par) + par.beta*EV_keep
         value_replace = util(1, x, par) + par.beta*EV_replace
         maxV = np.amax([value_keep, value_replace])
-        ### SOLUTION ###
         
         # 3. Find the maximum value across choices -> the (integrated) value function
         if taste_shocks == 'None':
-            # FILL IN. EXERCISE 1. Delete "None"
-            V_now[x] = None
-            pk[x] = None
-
-            ### SOLUTION ###
             V_now[x] = maxV
             pk[x] = (value_replace < value_keep) # either 0 or 1
-            ### SOLUTION ###
         
         elif taste_shocks == 'Analytical: Extreme Value':
-            # FILL IN. EXERCISE 4. Delete "None"
-            V_now[x] = None
-            pk[x] = None
-
-            ### SOLUTION ###
             exp_keep = np.exp( (value_keep-maxV)/par.sigma_eps )
             exp_replace = np.exp( (value_replace-maxV)/par.sigma_eps )
             V_now[x] = (maxV + par.sigma_eps * np.log(exp_keep+exp_replace)) # see trick in slides
             pk[x] = exp_keep/(exp_keep+exp_replace)
-            ### SOLUTION ###
             
         elif taste_shocks == 'Monte Carlo: Extreme Value':
             values = np.column_stack([value_keep + par.eps_keep_gumb, value_replace + par.eps_replace_gumb]) # shape (numeps, 2)
@@ -177,16 +144,10 @@ def bellman(V_next, par, taste_shocks = 'None', stochastic_transition = False):
             pk[x] = 1 - choices.mean()
         
         elif taste_shocks == 'Monte Carlo: Normal':
-            # FILL IN. EXERCISE 5. Delete "None". Hint: Just like when we drew the Gumbel taste shocks
-            V_now[x] = None
-            pk[x] = None         
-
-            ### SOLUTION ###
             values = np.column_stack([value_keep + par.eps_keep_norm, value_replace + par.eps_replace_norm]) # shape (numeps, 2)
             choices = np.argmax(values, axis = 1)
             V_now[x] = np.mean(np.max(values, axis=1)) # 1) take max of each row 2) take mean of all maxes'
             pk[x] = 1 - choices.mean()
-            ### SOLUTION ###
 
     return V_now, pk
 
@@ -196,14 +157,9 @@ def EV_deterministic(d, x, V_next, par):
     where the expectation is wrt. the state variable, i.e. no stochasticity here
     """
 
-    # FILL IN. EXERCISE 1. Delete "None"
-    x_next = None
-
-    ### SOLUTION
     x_next = 1 + x*(d==0)
     x_next = np.fmin(x_next, par.n-1) # Ensure that x_next is within grid. par.n-1 is largest grid point
     EV = V_next[x_next]
-    ### SOLUTION
 
     return EV
 
@@ -213,17 +169,12 @@ def EV_stochastic(d, x, V_next, par):
     where the expectation is wrt. the state variable
     """
 
-    # FILL IN. Delete "None".
-    EV = None
-
-    ### SOLUTION ###
     EV = 0
     x_next = x*(d==0)
     for prob_m, m in zip(par.p, par.transition):
         x_next_m = x_next+m
         x_next_m = np.fmin(x_next_m, par.n-1)
         EV += prob_m*V_next[x_next_m]
-    ### SOLUTION ###
     
     return EV
 
@@ -233,17 +184,12 @@ def bellman_vector(V_next, par):
     dynamic programming problem using the Bellman equation, vectorized
     """
     
-    # FILL IN. EXERCISE 6. Delete "None".
     # Hint: The function should follow the structure of "bellman" but you have to code
     # up some of the auxilary functions that we use, e.g. EV_stochastic
     # structure of function "bellman":
     # 1) compute EV(x,d) using Markov (transition) matrices
     # 2) compute value of each choice, "value-choice functions"
     # 3) compute value function by features of Gumbel distribution
-    V_now = None
-    pk = None
-
-    ### SOLUTION
     # 1. compute expected future value across states for each choice
     EV_keep = par.P1 @ V_next # (n,n) x (n,) -> shape (n,)
     EV_replace = par.P2 @ V_next # (n,n) x (n,) -> shape (n,)
@@ -258,7 +204,6 @@ def bellman_vector(V_next, par):
     exp_replace = np.exp( (value_replace-maxV)/par.sigma_eps )
     V_now = (maxV + par.sigma_eps * np.log(exp_keep+exp_replace))
     pk = exp_keep/(exp_keep+exp_replace)
-    ### SOLUTION
             
     return V_now, pk
 

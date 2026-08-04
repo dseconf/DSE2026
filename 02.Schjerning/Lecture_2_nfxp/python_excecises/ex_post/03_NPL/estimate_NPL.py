@@ -69,12 +69,7 @@ def ll(theta, model, data, pk0, out = 1):
     model.create_grid()
 
     # 3. update CCPs
-    # FILL IN.
-    pk = None
-
-    ### SOLUTION ###
     pk = model.Psi(pk0, Finv = model.Finv)
-    ### SOLUTION ###
     
     # 4. map choice probabilities to data
     pk_data = pk[data.x]
@@ -84,12 +79,7 @@ def ll(theta, model, data, pk0, out = 1):
         return pk, pk_data
 
     # 5. Calculate log-likelihood
-    # FILL IN.
-    log_lik = None
-
-    ### SOLUTION ###
     log_lik = (data.d == 0) * np.log(pk_data) + (data.d == 1) * np.log(1-pk_data)
-    ### SOLUTION ###
     
     # 6. return log-likelihood if out = 1
     f = -np.mean(log_lik)
