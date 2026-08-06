@@ -19,7 +19,7 @@ See [**dseconf.org/dse2026**](https://dseconf.org/dse2026) for details
 | 6 | Method of simulation moments | Toni Whited | ☐ | ☑ | ☑ |
 | 7 | Applications of MSM estimation in finance | Toni Whited | ☐ | ☑ | ☑ |
 | 8 | Dynamic models in banking | Dean Corbae | ☑ | ☑ | ☐ |
-| 9 | Demand estimation in banking models | Mark Egan | ☐ | ☐ | ☐ |
+| 9 | Demand estimation in banking models | Mark Egan | ☐ | ☑ | ☐ |
 | 10 | Household finance | Sylvain Catherine | ☐ | ☐ | ☐ |
 | 11 | Dynamic programming of mergers and acquisitions | Yufeng Wu | ☐ | ☐ | ☐ |
 | 12 | Dynamic games of network competition | Victor Aguirregabiria | ☑ | ☑ | ☐ |
